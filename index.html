@@ -3,63 +3,584 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Backstraight Capital Advisors</title>
+<title>BackStraight Capital Advisors</title>
+<meta name="description" content="Debt and equity advisory for commercial real estate owners, developers, and investors — led by three decades of institutional capital markets experience.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="BackStraight Capital Advisors">
+<meta property="og:description" content="Institutional capital markets expertise for commercial real estate.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0f1d33;
-    --ink: #1a1a1a;
-    --muted: #6b7280;
-    --rule: #e5e7eb;
+:root{
+  --navy:#162b52;
+  --navy-deep:#0b1628;
+  --navy-mid:#1d3a6b;
+  --red:#c0202f;
+  --ink:#16181d;
+  --body:#555c68;
+  --muted:#8b93a1;
+  --line:#e4e7ec;
+  --bg:#ffffff;
+  --bg-soft:#f6f8fb;
+  --ease:cubic-bezier(.22,.8,.3,1);
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  color:var(--ink);background:var(--bg);line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+section{position:relative}
+section[id]{scroll-margin-top:86px}
+
+/* ---------- reveal system ---------- */
+[data-reveal]{
+  opacity:0;transform:translateY(28px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);
+  transition-delay:var(--d,0ms);
+}
+[data-reveal].in{opacity:1;transform:none}
+[data-reveal="left"]{transform:translateX(-32px)}
+[data-reveal="scale"]{transform:scale(.94)}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;inset:0 0 auto 0;z-index:100;
+  padding:18px 0;transition:all .45s var(--ease);
+}
+header.stuck{
+  background:rgba(255,255,255,.88);backdrop-filter:blur(14px);
+  box-shadow:0 1px 0 rgba(22,43,82,.09);padding:11px 0;
+}
+.navbar{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{display:block;height:40px;width:auto;transition:height .45s var(--ease),opacity .4s var(--ease)}
+header.stuck .logo{height:34px}
+.logo-link{position:relative;display:flex;align-items:center;border-radius:4px}
+.logo-dark{position:absolute;left:0;top:50%;transform:translateY(-50%);opacity:0}
+header.stuck .logo-light{opacity:0}
+header.stuck .logo-dark{opacity:1}
+nav{display:flex;align-items:center;gap:34px}
+nav a{
+  color:#fff;text-decoration:none;font-size:.875rem;font-weight:500;
+  letter-spacing:.01em;position:relative;padding:4px 0;opacity:.82;
+  transition:opacity .25s,color .4s var(--ease);
+}
+header.stuck nav a{color:var(--navy)}
+.menu-btn{color:#fff;transition:color .4s var(--ease)}
+header.stuck .menu-btn{color:var(--navy)}
+header.stuck .navbar .btn-ghost{background:var(--navy);color:#fff;border-color:var(--navy)}
+header.stuck .navbar .btn-ghost:hover{background:var(--navy-mid);border-color:var(--navy-mid)}
+nav a::after{
+  content:'';position:absolute;left:0;bottom:0;height:1.5px;width:0;
+  background:var(--red);transition:width .35s var(--ease);
+}
+nav a:hover{opacity:1}
+nav a:hover::after{width:100%}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--navy);color:#fff;text-decoration:none;
+  padding:12px 24px;border-radius:3px;font-size:.875rem;font-weight:600;
+  letter-spacing:.01em;transition:all .3s var(--ease);border:1px solid var(--navy);
+}
+.btn:hover{background:var(--navy-mid);border-color:var(--navy-mid);transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(22,43,82,.55)}
+.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
+.btn-ghost:hover{background:rgba(255,255,255,.1);border-color:#fff;box-shadow:none}
+.btn .arw{transition:transform .3s var(--ease)}
+.btn:hover .arw{transform:translateX(4px)}
+.menu-btn{display:none;background:none;border:0;cursor:pointer;padding:8px}
+
+/* ---------- hero ---------- */
+.hero{
+  min-height:100svh;display:flex;align-items:center;
+  background:linear-gradient(165deg,#0b1628 0%,#162b52 48%,#1d3a6b 100%);
+  color:#fff;overflow:hidden;padding:120px 0 90px;
+}
+.hero::before{
+  content:'';position:absolute;top:-25%;right:-10%;width:72vw;height:72vw;
+  background:radial-gradient(circle,rgba(74,130,222,.26),transparent 62%);
+  pointer-events:none;animation:drift 22s ease-in-out infinite alternate;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-30%;left:-12%;width:58vw;height:58vw;
+  background:radial-gradient(circle,rgba(192,32,47,.17),transparent 65%);
+  pointer-events:none;animation:drift 27s ease-in-out infinite alternate-reverse;
+}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(4%,6%) scale(1.14)}}
+.hero-curve{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.5}
+.hero-curve path{
+  fill:none;stroke-width:1.4;
+  stroke-dasharray:2600;stroke-dashoffset:2600;
+  animation:draw 3.4s var(--ease) forwards;
+}
+.hero-curve path:nth-child(1){stroke:rgba(255,255,255,.4);animation-delay:.35s}
+.hero-curve path:nth-child(2){stroke:rgba(192,32,47,.65);animation-delay:.6s}
+.hero-curve path:nth-child(3){stroke:rgba(255,255,255,.16);animation-delay:.85s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hero .wrap{position:relative;z-index:2}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:11px;
+  font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.72);margin-bottom:28px;
+}
+.eyebrow::before{content:'';width:34px;height:1.5px;background:var(--red)}
+h1{
+  font-size:clamp(2.4rem,6.2vw,4.6rem);font-weight:800;line-height:1.04;
+  letter-spacing:-.034em;margin-bottom:28px;max-width:17ch;
+}
+h1 .accent{
+  background:linear-gradient(100deg,#fff 22%,#8fb4ec 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p.lede{
+  font-size:clamp(1.02rem,1.9vw,1.24rem);color:rgba(255,255,255,.8);
+  max-width:60ch;margin-bottom:42px;font-weight:400;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px}
+.scroll-cue{
+  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:2;
+  color:rgba(255,255,255,.5);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:11px;
+}
+.scroll-cue span{display:block;width:1px;height:42px;background:linear-gradient(rgba(255,255,255,.55),transparent);animation:cue 2.1s ease-in-out infinite}
+@keyframes cue{0%,100%{opacity:.25;transform:scaleY(.5);transform-origin:top}50%{opacity:1;transform:scaleY(1)}}
+
+/* ---------- stats ---------- */
+.stats{background:var(--bg-soft);border-bottom:1px solid var(--line);padding:76px 0}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.stat{text-align:center;padding:16px 20px;position:relative}
+.stat+.stat::before{content:'';position:absolute;left:0;top:18%;height:64%;width:1px;background:var(--line)}
+.stat .num{
+  font-size:clamp(2.3rem,5vw,3.5rem);font-weight:800;color:var(--navy);
+  letter-spacing:-.03em;line-height:1;margin-bottom:12px;font-variant-numeric:tabular-nums;
+}
+.stat .num .unit{color:var(--red)}
+.stat .num .tbd{opacity:.3}
+.stat .lbl{font-size:.74rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- generic section ---------- */
+.sec{padding:112px 0}
+.sec-soft{background:var(--bg-soft)}
+.sec-head{max-width:720px;margin-bottom:62px}
+.sec-tag{
+  display:inline-flex;align-items:center;gap:11px;font-size:.7rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:20px;
+}
+.sec-tag::before{content:'';width:26px;height:1.5px;background:var(--red)}
+h2{font-size:clamp(1.85rem,4.1vw,2.85rem);font-weight:800;letter-spacing:-.03em;line-height:1.13;color:var(--navy);margin-bottom:20px}
+.sec p.sub{font-size:1.06rem;color:var(--body);max-width:62ch}
+
+/* ---------- capability cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:22px}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:6px;padding:36px 30px 34px;
+  position:relative;overflow:hidden;transition:all .45s var(--ease);
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;height:2.5px;width:0;
+  background:linear-gradient(90deg,var(--navy),var(--red));transition:width .5s var(--ease);
+}
+.card:hover{transform:translateY(-7px);box-shadow:0 22px 48px -24px rgba(22,43,82,.4);border-color:transparent}
+.card:hover::before{width:100%}
+.card .idx{font-size:.7rem;font-weight:700;letter-spacing:.17em;color:var(--red);margin-bottom:22px;display:block}
+.card h3{font-size:1.12rem;font-weight:700;color:var(--navy);margin-bottom:12px;letter-spacing:-.012em}
+.card p{font-size:.93rem;color:var(--body)}
+
+/* ---------- experience ---------- */
+.exp-intro{
+  border-left:2.5px solid var(--red);padding:4px 0 4px 26px;margin-bottom:52px;
+  max-width:68ch;font-size:1.04rem;color:var(--body);
+}
+.exp-intro strong{color:var(--navy);font-weight:600}
+.deals{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:20px}
+.deal{
+  background:#fff;border:1px solid var(--line);border-radius:6px;padding:30px 28px;
+  transition:all .45s var(--ease);position:relative;
+}
+.deal:hover{transform:translateY(-5px);box-shadow:0 20px 44px -26px rgba(22,43,82,.38)}
+.deal .amt{font-size:1.75rem;font-weight:800;color:var(--navy);letter-spacing:-.028em;line-height:1;margin-bottom:8px}
+.deal .typ{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:16px}
+.deal .nm{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+.deal .loc{font-size:.88rem;color:var(--muted);margin-bottom:16px}
+.deal .attr{font-size:.74rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;font-style:italic}
+.placeholder-note{
+  margin-top:34px;padding:16px 20px;background:#fffbe9;border:1px dashed #e0c86a;
+  border-radius:5px;font-size:.85rem;color:#7a6320;
+}
+
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:72px;align-items:center}
+.portrait{position:relative}
+.portrait img{width:100%;height:auto;display:block;border-radius:6px;position:relative;z-index:2}
+.portrait::after{
+  content:'';position:absolute;inset:auto -16px -16px auto;width:62%;height:62%;
+  border:2px solid var(--red);border-radius:6px;z-index:1;
+}
+.about h2{margin-bottom:10px}
+.about .role{font-size:.76rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--red);margin-bottom:26px}
+.about p{color:var(--body);margin-bottom:18px}
+.creds{list-style:none;margin-top:32px;border-top:1px solid var(--line);padding-top:26px}
+.creds li{display:flex;gap:15px;padding:11px 0;font-size:.93rem;color:var(--body);align-items:flex-start}
+.creds li::before{content:'';flex:0 0 6px;height:6px;margin-top:9px;background:var(--red);border-radius:50%}
+.creds strong{color:var(--navy);font-weight:600}
+
+/* ---------- contact ---------- */
+.contact{
+  background:linear-gradient(145deg,#0b1628,#162b52 60%,#1d3a6b);
+  color:#fff;text-align:center;padding:124px 0;overflow:hidden;
+}
+.contact::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:120vw;height:120vw;
+  background:radial-gradient(circle,rgba(74,130,222,.17),transparent 58%);pointer-events:none;
+}
+.contact .wrap{position:relative;z-index:2}
+.contact h2{color:#fff;margin-bottom:20px}
+.contact p{color:rgba(255,255,255,.78);max-width:52ch;margin:0 auto 40px;font-size:1.06rem}
+
+/* ---------- footer ---------- */
+footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40px;font-size:.84rem}
+.foot-top{display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.1)}
+.foot-name{color:#fff;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+.foot-links{display:flex;gap:26px;flex-wrap:wrap}
+.foot-links a{color:rgba(255,255,255,.62);text-decoration:none;transition:color .25s}
+.foot-links a:hover{color:#fff}
+.disclaimer{margin-top:26px;font-size:.76rem;line-height:1.7;color:rgba(255,255,255,.42);max-width:88ch}
+
+/* ---------- progress bar ---------- */
+.progress{position:fixed;top:0;left:0;height:2.5px;background:var(--red);z-index:200;width:0;transition:width .1s linear}
+
+/* ---------- responsive ---------- */
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr;gap:48px}
+  .stat-grid{grid-template-columns:1fr}
+  .stat+.stat::before{display:none}
+  .stat+.stat{border-top:1px solid var(--line)}
+}
+@media(max-width:720px){
+  .wrap{padding:0 20px}
+  nav{
+    position:fixed;inset:0;background:rgba(255,255,255,.98);backdrop-filter:blur(16px);
+    flex-direction:column;justify-content:center;gap:30px;font-size:1.2rem;
+    transform:translateX(100%);transition:transform .45s var(--ease);
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    padding: 2rem;
-    background: #fbfbfa;
-    color: var(--ink);
-    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  }
-  main { max-width: 34rem; text-align: center; }
-  .mark {
-    font-size: .7rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 2rem;
-  }
-  h1 {
-    font-family: "Iowan Old Style", Palatino, Georgia, serif;
-    font-size: clamp(1.9rem, 5vw, 2.9rem);
-    font-weight: 500;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-    color: var(--navy);
-    margin: 0 0 1.25rem;
-  }
-  p { color: var(--muted); margin: 0 auto; max-width: 26rem; }
-  hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5rem auto; width: 3rem; }
-  .status {
-    display: inline-block;
-    margin-top: 2.5rem;
-    padding: .4rem .8rem;
-    border: 1px solid var(--rule);
-    border-radius: 999px;
-    font-size: .75rem;
-    color: var(--muted);
-    background: #fff;
-  }
+  nav.open{transform:none}
+  nav a,header.stuck nav a{font-size:1.14rem;color:var(--navy)}
+  nav .btn-ghost,header.stuck .navbar .btn-ghost{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .menu-btn{display:block;position:relative;z-index:110;color:#fff}
+  header.stuck .menu-btn{color:var(--navy)}
+  .menu-btn[aria-expanded="true"]{color:var(--navy)}
+  .sec{padding:80px 0}
+  .hero{padding:110px 0 86px}
+  .scroll-cue{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  [data-reveal]{opacity:1!important;transform:none!important}
+  .hero-curve path{stroke-dashoffset:0}
+}
 </style>
 </head>
 <body>
-  <main>
-    <div class="mark">Backstraight Capital Advisors</div>
-    <h1>Hello world.</h1>
-    <p>The deployment pipeline is live. Real content coming soon.</p>
-    <hr>
-    <span class="status">Deployed from <code>main</code> via GitHub Actions</span>
-  </main>
+
+<div class="progress" id="progress"></div>
+
+<header id="header">
+  <div class="wrap navbar">
+    <a href="#top" class="logo-link">
+      <img src="assets/logo-light.png" alt="BackStraight Capital Advisors" class="logo logo-light">
+      <img src="assets/logo.png" alt="" aria-hidden="true" class="logo logo-dark">
+    </a>
+    <nav id="nav">
+      <a href="#capabilities">Capabilities</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch <span class="arw">&rarr;</span></a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <svg class="hero-curve" viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path d="M-100,680 C250,620 420,430 700,380 C980,330 1180,300 1500,250"/>
+    <path d="M-100,740 C270,680 450,490 730,436 C1010,382 1210,352 1500,300"/>
+    <path d="M-100,620 C230,566 400,376 680,326 C960,276 1160,248 1500,200"/>
+  </svg>
+  <div class="wrap">
+    <div class="eyebrow" data-reveal style="--d:120ms">Commercial Real Estate Capital</div>
+    <h1 data-reveal style="--d:240ms">Capital strategy from the <span class="accent">principal's side</span> of the table.</h1>
+    <p class="lede" data-reveal style="--d:380ms">
+      BackStraight Capital Advisors provides debt and equity advisory to commercial real estate
+      owners, developers, and investors — grounded in three decades of institutional experience
+      structuring, raising, and closing capital on some of the West Coast's most complex projects.
+    </p>
+    <div class="hero-cta" data-reveal style="--d:520ms">
+      <a href="#contact" class="btn">Start a conversation <span class="arw">&rarr;</span></a>
+      <a href="#experience" class="btn btn-ghost">See the track record</a>
+    </div>
+  </div>
+  <div class="scroll-cue">Scroll<span></span></div>
+</section>
+
+<section class="stats">
+  <div class="wrap stat-grid">
+    <div class="stat" data-reveal style="--d:0ms">
+      <div class="num">$<span class="tbd">X</span><span class="unit">B</span></div>
+      <div class="lbl">Project Financing Raised</div>
+    </div>
+    <div class="stat" data-reveal style="--d:130ms">
+      <div class="num">$<span data-count="1">0</span><span class="unit">B+</span></div>
+      <div class="lbl">Commercial Real Estate Acquired</div>
+    </div>
+    <div class="stat" data-reveal style="--d:260ms">
+      <div class="num"><span data-count="30">0</span><span class="unit">+</span></div>
+      <div class="lbl">Years in the Industry</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="capabilities">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag" data-reveal>Capabilities</div>
+      <h2 data-reveal style="--d:90ms">Capital solutions, engineered around the asset.</h2>
+      <p class="sub" data-reveal style="--d:180ms">
+        Every project has a capital structure that fits it best. We find it, price it, and
+        close it — bringing an owner's perspective to the table rather than a broker's.
+      </p>
+    </div>
+    <div class="cards">
+      <div class="card" data-reveal style="--d:0ms">
+        <span class="idx">01</span>
+        <h3>Debt Placement</h3>
+        <p>Construction, bridge, and permanent financing sourced across banks, debt funds, life companies, and agency lenders.</p>
+      </div>
+      <div class="card" data-reveal style="--d:110ms">
+        <span class="idx">02</span>
+        <h3>Equity &amp; Joint Ventures</h3>
+        <p>LP and GP equity, programmatic joint ventures, and co-investment structures matched to sponsor strategy and hold period.</p>
+      </div>
+      <div class="card" data-reveal style="--d:220ms">
+        <span class="idx">03</span>
+        <h3>Recapitalization</h3>
+        <p>Restructuring existing capital stacks, navigating loan maturities, and creating liquidity without forcing a sale.</p>
+      </div>
+      <div class="card" data-reveal style="--d:330ms">
+        <span class="idx">04</span>
+        <h3>Strategic Advisory</h3>
+        <p>Underwriting review, capital planning, and portfolio strategy for owners making decisions that outlast any single transaction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-soft" id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag" data-reveal>Selected Experience</div>
+      <h2 data-reveal style="--d:90ms">Three decades of institutional execution.</h2>
+    </div>
+    <div class="exp-intro" data-reveal style="--d:150ms">
+      As <strong>Chief Investment Officer of Jay Paul Company</strong> from 2000 to 2025, Matt Lituchy
+      led acquisitions, dispositions, and all capital and financing activity for one of Silicon
+      Valley's largest office and life science development platforms — raising billions in project
+      financing and acquiring more than <strong>$1 billion</strong> of commercial real estate across
+      the Bay Area and San Diego County.
+    </div>
+
+    <!-- ============================================================
+         DEAL TOMBSTONES — PLACEHOLDER DATA
+         Replace with real transactions once Matt confirms them.
+         Keep the .attr line on every card: attribution is what makes
+         these his biography rather than BackStraight's portfolio.
+         ============================================================ -->
+    <div class="deals">
+      <div class="deal" data-reveal style="--d:0ms">
+        <div class="amt">$000M</div>
+        <div class="typ">Construction Financing</div>
+        <div class="nm">Project Name</div>
+        <div class="loc">City, State &middot; 000,000 SF</div>
+        <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
+      </div>
+      <div class="deal" data-reveal style="--d:110ms">
+        <div class="amt">$000M</div>
+        <div class="typ">Acquisition</div>
+        <div class="nm">Project Name</div>
+        <div class="loc">City, State &middot; 000,000 SF</div>
+        <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
+      </div>
+      <div class="deal" data-reveal style="--d:220ms">
+        <div class="amt">$000M</div>
+        <div class="typ">Recapitalization</div>
+        <div class="nm">Project Name</div>
+        <div class="loc">City, State &middot; 000,000 SF</div>
+        <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
+      </div>
+    </div>
+    <div class="placeholder-note" data-reveal>
+      <strong>Placeholder content.</strong> These three cards are a layout template — swap in real
+      transactions when Matt sends them. Fill the financing figure in the stat band above at the
+      same time.
+    </div>
+  </div>
+</section>
+
+<section class="sec about" id="about">
+  <div class="wrap about-grid">
+    <div class="portrait" data-reveal="scale">
+      <img src="assets/matt-lituchy.jpg" alt="Matt Lituchy, Founder of BackStraight Capital Advisors" loading="lazy" width="1400" height="1000">
+    </div>
+    <div>
+      <div class="sec-tag" data-reveal>About</div>
+      <h2 data-reveal style="--d:90ms">Matt Lituchy</h2>
+      <div class="role" data-reveal style="--d:140ms">Founder</div>
+
+      <!-- Replace the two paragraphs below with Matt's own blurb when it arrives. -->
+      <p data-reveal style="--d:200ms">
+        Matt founded BackStraight Capital Advisors after more than thirty years in commercial real
+        estate, most recently as Chief Investment Officer of Jay Paul Company, where he spent
+        twenty-five years building and financing one of the West Coast's most significant
+        development portfolios.
+      </p>
+      <p data-reveal style="--d:260ms">
+        That experience sits on the ownership side of the table — underwriting the deal, structuring
+        the capital, and carrying the risk — which is a materially different vantage point from
+        intermediating it. BackStraight exists to bring that perspective to owners and developers
+        who need capital raised and structured well.
+      </p>
+
+      <ul class="creds">
+        <li data-reveal style="--d:300ms"><span><strong>Chief Investment Officer</strong>, Jay Paul Company &mdash; 2000&ndash;2025. Acquisitions, dispositions, and all capital and financing activity.</span></li>
+        <li data-reveal style="--d:360ms"><span><strong>SVP &amp; District Manager</strong>, KeyCorp Real Estate Capital. Earlier commercial real estate finance roles in San Francisco and New York.</span></li>
+        <li data-reveal style="--d:420ms"><span><strong>NAIOP</strong> &mdash; Board of Directors, San Diego and Silicon Valley chapters; Chapter President, 2013.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-tag" data-reveal style="justify-content:center">Contact</div>
+    <h2 data-reveal style="--d:90ms">Let's talk about your capital stack.</h2>
+    <p data-reveal style="--d:170ms">
+      Whether you're financing a ground-up development, facing a near-term maturity, or weighing
+      a recapitalization, the conversation starts the same way.
+    </p>
+    <div data-reveal style="--d:250ms">
+      <!-- TODO: replace with Matt's real email address before sharing this URL. -->
+      <a href="mailto:REPLACE@EXAMPLE.COM" class="btn btn-ghost">REPLACE@EXAMPLE.COM</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-name">BackStraight Capital Advisors</div>
+      <div class="foot-links">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#experience">Experience</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <p class="disclaimer">
+      &copy; <span id="yr">2026</span> BackStraight Capital Advisors. All rights reserved.
+      BackStraight Capital Advisors is not a registered investment adviser. The information on this
+      site is provided for general informational purposes only and does not constitute investment,
+      legal, or tax advice, nor an offer to buy or sell any security. Transactions described reflect
+      the individual professional experience of Matt Lituchy in roles held at prior firms and are
+      not transactions of BackStraight Capital Advisors.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* scroll reveals */
+  var items = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    items.forEach(function(el){ io.observe(el); });
+  } else {
+    items.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* animated counters */
+  function runCount(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    if (reduce) { el.textContent = target; return; }
+    var dur = 1500, t0 = null;
+    function step(ts){
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var nums = document.querySelectorAll('[data-count]');
+  if ('IntersectionObserver' in window) {
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { runCount(e.target); cio.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 });
+    nums.forEach(function(el){ cio.observe(el); });
+  } else {
+    nums.forEach(function(el){ el.textContent = el.getAttribute('data-count'); });
+  }
+
+  /* header state + scroll progress */
+  var header = document.getElementById('header');
+  var bar = document.getElementById('progress');
+  var ticking = false;
+  function onScroll(){
+    var y = window.scrollY || window.pageYOffset;
+    header.classList.toggle('stuck', y > 40);
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+  }, { passive: true });
+  onScroll();
+
+  /* mobile menu */
+  var btn = document.getElementById('menuBtn');
+  var nav = document.getElementById('nav');
+  btn.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  nav.addEventListener('click', function(e){
+    if (e.target.tagName === 'A') {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  });
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+})();
+</script>
 </body>
 </html>
