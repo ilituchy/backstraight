@@ -213,6 +213,62 @@ h2{font-size:clamp(1.85rem,4.1vw,2.85rem);font-weight:800;letter-spacing:-.03em;
 .deal .nm{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:4px}
 .deal .loc{font-size:.88rem;color:var(--muted);margin-bottom:16px}
 .deal .attr{font-size:.74rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;font-style:italic}
+.deal .note{font-size:.86rem;color:var(--body);line-height:1.55;margin-bottom:18px}
+.exp-foot{
+  margin-top:34px;max-width:72ch;font-size:.82rem;line-height:1.65;color:var(--muted);
+  border-left:2px solid var(--line);padding-left:18px;
+}
+
+/* featured transactions */
+.projects{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+  gap:26px;margin-bottom:26px;
+}
+.proj{
+  position:relative;aspect-ratio:4/5;border-radius:8px;overflow:hidden;
+  background:var(--navy-deep);isolation:isolate;
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+}
+.proj:hover{transform:translateY(-6px);box-shadow:0 30px 60px -30px rgba(11,22,40,.55)}
+.proj img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform 1.2s var(--ease);
+}
+.proj:hover img{transform:scale(1.06)}
+.proj::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(8,16,30,.45) 0%,rgba(8,16,30,.10) 55%,rgba(8,16,30,0) 100%);
+}
+/* The scrim rides on the body, not the card, so it always covers the text
+   no matter how tall the content gets at narrow widths. */
+.proj-body{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;color:#fff;
+  padding:110px 30px 32px;
+  background:linear-gradient(to top,
+    rgba(8,16,30,.95) 0%,rgba(8,16,30,.9) 38%,
+    rgba(8,16,30,.66) 68%,rgba(8,16,30,.22) 88%,rgba(8,16,30,0) 100%);
+}
+.proj .typ{
+  font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:#ef5c6b;margin-bottom:12px;
+}
+.proj .amt{font-size:2.5rem;font-weight:800;letter-spacing:-.032em;line-height:1;margin-bottom:12px}
+.proj .nm{font-size:1.18rem;font-weight:600;margin-bottom:3px;letter-spacing:-.01em}
+.proj .loc{font-size:.88rem;color:rgba(255,255,255,.64);margin-bottom:18px}
+.proj .facts{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.proj .facts span{
+  font-size:.73rem;padding:5px 12px;border-radius:100px;
+  border:1px solid rgba(255,255,255,.26);color:rgba(255,255,255,.86);
+}
+.proj .attr{
+  font-size:.72rem;font-style:italic;color:rgba(255,255,255,.56);
+  border-top:1px solid rgba(255,255,255,.18);padding-top:14px;
+}
+@media (max-width:560px){
+  .proj{aspect-ratio:3/4}
+  .proj-body{padding:90px 22px 26px}
+  .proj .amt{font-size:2.1rem}
+}
 .placeholder-note{
   margin-top:34px;padding:16px 20px;background:#fffbe9;border:1px dashed #e0c86a;
   border-radius:5px;font-size:.85rem;color:#7a6320;
@@ -290,6 +346,9 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
 .foot-links a{color:rgba(255,255,255,.62);text-decoration:none;transition:color .25s}
 .foot-links a:hover{color:#fff}
 .disclaimer{margin-top:26px;font-size:.76rem;line-height:1.7;color:rgba(255,255,255,.42);max-width:88ch}
+.credits{margin-top:14px;font-size:.72rem;color:rgba(255,255,255,.34)}
+.credits a{color:rgba(255,255,255,.5);text-decoration:underline;text-underline-offset:2px}
+.credits a:hover{color:rgba(255,255,255,.8)}
 
 /* ---------- progress bar ---------- */
 .progress{position:fixed;top:0;left:0;height:2.5px;background:var(--red);z-index:200;width:0;transition:width .1s linear}
@@ -435,38 +494,92 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
     </div>
 
     <!-- ============================================================
-         DEAL TOMBSTONES — PLACEHOLDER DATA
-         Replace with real transactions once Matt confirms them.
+         SELECTED TRANSACTIONS — Jay Paul Company tenure.
+         Every figure below is sourced from public trade reporting, NOT
+         from Matt. He should confirm or correct each one.
          Keep the .attr line on every card: attribution is what makes
          these his biography rather than BackStraight's portfolio.
          ============================================================ -->
+    <div class="projects">
+      <article class="proj" data-reveal="scale" style="--d:0ms">
+        <img src="assets/181-fremont.jpg"
+             srcset="assets/181-fremont-sm.jpg 600w, assets/181-fremont.jpg 1200w"
+             sizes="(max-width:760px) 92vw, 44vw"
+             alt="181 Fremont Street tower, San Francisco" loading="lazy" width="1200" height="1599">
+        <div class="proj-body">
+          <div class="typ">Construction Financing</div>
+          <div class="amt">$480M</div>
+          <div class="nm">181 Fremont</div>
+          <div class="loc">San Francisco, California</div>
+          <div class="facts">
+            <span>802 ft &middot; 55 stories</span>
+            <span>404,000 SF office</span>
+            <span>Completed 2018</span>
+          </div>
+          <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
+        </div>
+      </article>
+
+      <article class="proj" data-reveal="scale" style="--d:130ms">
+        <img src="assets/200-park.jpg"
+             srcset="assets/200-park-sm.jpg 600w, assets/200-park.jpg 1200w"
+             sizes="(max-width:760px) 92vw, 44vw"
+             alt="200 Park Avenue office tower, downtown San Jose" loading="lazy" width="1200" height="1599">
+        <div class="proj-body">
+          <div class="typ">C&#8209;PACE Recapitalization</div>
+          <div class="amt">$220M</div>
+          <div class="nm">200 Park Avenue</div>
+          <div class="loc">San Jose, California</div>
+          <div class="facts">
+            <span>965,000 SF</span>
+            <span>19 stories</span>
+            <span>Completed 2024</span>
+          </div>
+          <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
+        </div>
+      </article>
+    </div>
+
     <div class="deals">
       <div class="deal" data-reveal style="--d:0ms">
-        <div class="amt">$000M</div>
-        <div class="typ">Construction Financing</div>
-        <div class="nm">Project Name</div>
-        <div class="loc">City, State &middot; 000,000 SF</div>
+        <div class="amt">~$1B</div>
+        <div class="typ">Development Capitalization</div>
+        <div class="nm">Moffett Place</div>
+        <div class="loc">Sunnyvale, California &middot; 1.9M SF</div>
+        <div class="note">Six-building campus on a 55-acre assemblage. Initial phase financed
+          through a syndicate of twelve lenders.</div>
         <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
       </div>
       <div class="deal" data-reveal style="--d:110ms">
-        <div class="amt">$000M</div>
-        <div class="typ">Acquisition</div>
-        <div class="nm">Project Name</div>
-        <div class="loc">City, State &middot; 000,000 SF</div>
+        <div class="amt">$500M</div>
+        <div class="typ">Refinancing</div>
+        <div class="nm">Moffett Towers</div>
+        <div class="loc">Sunnyvale, California &middot; 1.8M SF</div>
+        <div class="note">Seven-building office campus. Ten-year fixed-rate CMBS execution at
+          4.13%, anchored by a full-building Amazon lease.</div>
         <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
       </div>
       <div class="deal" data-reveal style="--d:220ms">
-        <div class="amt">$000M</div>
-        <div class="typ">Recapitalization</div>
-        <div class="nm">Project Name</div>
-        <div class="loc">City, State &middot; 000,000 SF</div>
+        <div class="amt">$283.5M</div>
+        <div class="typ">Acquisition</div>
+        <div class="nm">CityView Plaza</div>
+        <div class="loc">San Jose, California &middot; 11 acres</div>
+        <div class="note">Downtown land assemblage acquired for a mixed-use redevelopment of
+          roughly 3.4 million square feet.</div>
         <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
       </div>
     </div>
+
+    <p class="exp-foot" data-reveal>
+      Transactions completed by Jay Paul Company during Matt Lituchy's tenure as Chief Investment
+      Officer. They are presented as a record of his individual professional experience and are not
+      transactions of BackStraight Capital Advisors.
+    </p>
+
     <div class="placeholder-note" data-reveal>
-      <strong>Placeholder content.</strong> These three cards are a layout template — swap in real
-      transactions when Matt sends them. Fill the financing figure in the stat band above at the
-      same time.
+      <strong>Needs Matt's sign-off.</strong> Every figure on this page was taken from public trade
+      reporting, not from Matt &mdash; he should confirm or correct each one, and swap in any deal
+      he would rather feature. The financing total in the stat band above is still blank.
     </div>
   </div>
 </section>
@@ -586,6 +699,15 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
       legal, or tax advice, nor an offer to buy or sell any security. Transactions described reflect
       the individual professional experience of Matt Lituchy in roles held at prior firms and are
       not transactions of BackStraight Capital Advisors.
+    </p>
+    <p class="disclaimer credits">
+      <!-- CC BY-SA 4.0 requires credit + license link. Do not remove. -->
+      Photography: <em>181 Fremont</em> by
+      <a href="https://commons.wikimedia.org/wiki/User:Dead.rabbit" rel="noopener">Dead.rabbit</a>;
+      <em>200 Park Avenue</em> by
+      <a href="https://commons.wikimedia.org/wiki/User:Xnatedawgx" rel="noopener">Xnatedawgx</a>.
+      Both via Wikimedia Commons, cropped and resized, licensed under
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>.
     </p>
   </div>
 </footer>
