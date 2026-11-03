@@ -649,7 +649,7 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
       <!-- spam trap: real people never fill this in -->
       <div class="hp" aria-hidden="true">
         <label for="cf-website">Leave this field empty</label>
-        <input id="cf-website" name="botcheck" type="checkbox" tabindex="-1" autocomplete="off">
+        <input id="cf-website" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
       </div>
 
       <button type="submit" class="btn" id="cfSubmit">Send inquiry <span class="arw">&rarr;</span></button>
@@ -766,12 +766,11 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
   });
 
   /* ---------------- contact form ----------------
-     Web3Forms relays to the address the key was issued to. The key is designed
-     to be public and is the only configuration — there is no dashboard and no
-     account to sign into. To change where inquiries land, issue a new key at
-     web3forms.com for the new address and swap the string below. */
-  var ACCESS_KEY = 'WEB3FORMS_ACCESS_KEY';
-  var FORM_ENDPOINT = 'https://api.web3forms.com/submit';
+     The delivery address lives in the Formspree form's settings, not here, so
+     where inquiries land can change without touching this file. Only the form
+     id below ties the page to that form. */
+  var FORM_ID = 'FORMSPREE_FORM_ID';
+  var FORM_ENDPOINT = 'https://formspree.io/f/' + FORM_ID;
 
   var form = document.getElementById('contactForm');
   var submitBtn = document.getElementById('cfSubmit');
@@ -815,7 +814,7 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
       setMsg('bad', 'Please fix the highlighted fields and try again.');
       return;
     }
-    if (document.getElementById('cf-website').checked) return;  /* bot */
+    if (document.getElementById('cf-website').value) return;  /* bot */
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending\u2026';
@@ -828,10 +827,8 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
     /* Keys become the row labels in the notification email, so they are written
        the way they should read in Matt's inbox. */
     var payload = {
-      access_key: ACCESS_KEY,
-      from_name: 'BackStraight Capital Advisors',
-      subject: 'New inquiry \u2014 ' + who + (firm ? ' (' + firm + ')' : ''),
-      name: who,
+      _subject: 'New inquiry \u2014 ' + who + (firm ? ' (' + firm + ')' : ''),
+      Name: who,
       email: get('cf-email'),
       Company: firm || '\u2014',
       Phone: get('cf-phone') || '\u2014',
@@ -846,7 +843,7 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
     }).then(function(res){
       return res.json().then(function(d){ return { ok: res.ok, data: d }; });
     }).then(function(r){
-      if (r.ok && r.data && r.data.success) {
+      if (r.ok) {
         form.reset();
         setMsg('ok', '<strong>Thank you \u2014 your message is on its way.</strong> You can expect a reply within one business day.');
       } else {
