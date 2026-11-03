@@ -157,7 +157,7 @@ h1 .accent{
 
 /* ---------- stats ---------- */
 .stats{background:var(--bg-soft);border-bottom:1px solid var(--line);padding:76px 0}
-.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .stat{text-align:center;padding:16px 20px;position:relative}
 .stat+.stat::before{content:'';position:absolute;left:0;top:18%;height:64%;width:1px;background:var(--line)}
 .stat .num{
@@ -205,13 +205,17 @@ h2{font-size:clamp(1.85rem,4.1vw,2.85rem);font-weight:800;letter-spacing:-.03em;
 .deal{
   background:#fff;border:1px solid var(--line);border-radius:6px;padding:30px 28px;
   transition:all .45s var(--ease);position:relative;
+  display:flex;flex-direction:column;
 }
+/* keeps the attribution lines on one baseline across a row of uneven cards */
+.deal .attr{margin-top:auto}
 .deal:hover{transform:translateY(-5px);box-shadow:0 20px 44px -26px rgba(22,43,82,.38)}
 .deal .amt{font-size:1.75rem;font-weight:800;color:var(--navy);letter-spacing:-.028em;line-height:1;margin-bottom:8px}
 .deal .typ{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:16px}
 .deal .nm{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:4px}
 .deal .loc{font-size:.88rem;color:var(--muted);margin-bottom:16px}
 .deal .attr{font-size:.74rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;font-style:italic}
+.deal .amt .sf{font-size:.95rem;font-weight:700;color:var(--muted);letter-spacing:.02em}
 .deal .note{font-size:.86rem;color:var(--body);line-height:1.55;margin-bottom:18px}
 .exp-foot{
   margin-top:34px;max-width:72ch;font-size:.82rem;line-height:1.65;color:var(--muted);
@@ -425,11 +429,15 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
 <section class="stats">
   <div class="wrap stat-grid">
     <div class="stat" data-reveal style="--d:0ms">
-      <div class="num">$<span data-count="1">0</span><span class="unit">B+</span></div>
-      <div class="lbl">Commercial Real Estate Acquired</div>
+      <div class="num">$<span data-count="12">0</span><span class="unit">B</span></div>
+      <div class="lbl">Project Financing Secured</div>
     </div>
     <div class="stat" data-reveal style="--d:130ms">
-      <div class="num"><span data-count="30">0</span><span class="unit">+</span></div>
+      <div class="num">$<span data-count="2">0</span><span class="unit">B+</span></div>
+      <div class="lbl">Commercial Real Estate Acquired</div>
+    </div>
+    <div class="stat" data-reveal style="--d:260ms">
+      <div class="num"><span data-count="40">0</span><span class="unit">+</span></div>
       <div class="lbl">Years in the Industry</div>
     </div>
   </div>
@@ -477,11 +485,12 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
       <h2 data-reveal style="--d:90ms">Three decades of institutional execution.</h2>
     </div>
     <div class="exp-intro" data-reveal style="--d:150ms">
-      As <strong>Chief Investment Officer of Jay Paul Company</strong> from 2000 to 2025, Matt Lituchy
-      led acquisitions, dispositions, and all capital and financing activity for one of Silicon
-      Valley's largest office and life science development platforms — raising billions in project
-      financing and acquiring more than <strong>$1 billion</strong> of commercial real estate across
-      the Bay Area and San Diego County.
+      As <strong>Chief Investment Officer of Jay Paul Company</strong> from 2000 to 2025, Matt
+      Lituchy led acquisitions, dispositions, and all capital markets and financing activity for one
+      of the West Coast's largest office development platforms &mdash; securing more than
+      <strong>$12 billion</strong> in project financing and acquiring over <strong>$2 billion</strong>
+      of commercial real estate across the San Francisco Bay Area, Silicon Valley, San Diego County,
+      and Austin. Over his tenure the portfolio grew from 3 million to more than 14 million square feet.
     </div>
 
     <div class="projects">
@@ -491,14 +500,14 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
              sizes="(max-width:760px) 92vw, 44vw"
              alt="181 Fremont Street tower, San Francisco" loading="lazy" width="1200" height="1599">
         <div class="proj-body">
-          <div class="typ">Construction Financing</div>
+          <div class="typ">Acquisition &amp; Construction Financing</div>
           <div class="amt">$480M</div>
           <div class="nm">181 Fremont</div>
           <div class="loc">San Francisco, California</div>
           <div class="facts">
-            <span>802 ft &middot; 55 stories</span>
-            <span>404,000 SF office</span>
-            <span>Completed 2018</span>
+            <span>70 stories &middot; 802 ft</span>
+            <span>$72M site acquisition</span>
+            <span>67 residences</span>
           </div>
           <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
         </div>
@@ -515,9 +524,9 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
           <div class="nm">200 Park Avenue</div>
           <div class="loc">San Jose, California</div>
           <div class="facts">
-            <span>965,000 SF</span>
+            <span>970,000 SF</span>
             <span>19 stories</span>
-            <span>Completed 2024</span>
+            <span>Largest office C&#8209;PACE in the U.S.</span>
           </div>
           <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
         </div>
@@ -526,30 +535,54 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
 
     <div class="deals">
       <div class="deal" data-reveal style="--d:0ms">
-        <div class="amt">~$1B</div>
-        <div class="typ">Development Capitalization</div>
+        <div class="amt">1.9M <span class="sf">SF</span></div>
+        <div class="typ">Development</div>
         <div class="nm">Moffett Place</div>
-        <div class="loc">Sunnyvale, California &middot; 1.9M SF</div>
-        <div class="note">Six-building campus on a 55-acre assemblage. Initial phase financed
-          through a syndicate of twelve lenders.</div>
+        <div class="loc">Sunnyvale, California &middot; 50 acres</div>
+        <div class="note">Six-building campus assembled in Moffett Park and leased in full to
+          Google.</div>
         <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
       </div>
       <div class="deal" data-reveal style="--d:110ms">
-        <div class="amt">$500M</div>
-        <div class="typ">Refinancing</div>
-        <div class="nm">Moffett Towers</div>
-        <div class="loc">Sunnyvale, California &middot; 1.8M SF</div>
-        <div class="note">Seven-building office campus. Ten-year fixed-rate CMBS execution at
-          4.13%, anchored by a full-building Amazon lease.</div>
+        <div class="amt">1.8M <span class="sf">SF</span></div>
+        <div class="typ">Development</div>
+        <div class="nm">Moffett Towers II</div>
+        <div class="loc">Sunnyvale, California &middot; 47 acres</div>
+        <div class="note">Campus developed on an assembled site and leased to Amazon and Meta.</div>
         <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
       </div>
       <div class="deal" data-reveal style="--d:220ms">
-        <div class="amt">$283.5M</div>
-        <div class="typ">Acquisition</div>
-        <div class="nm">CityView Plaza</div>
-        <div class="loc">San Jose, California &middot; 11 acres</div>
-        <div class="note">Downtown land assemblage acquired for a mixed-use redevelopment of
-          roughly 3.4 million square feet.</div>
+        <div class="amt">925,000 <span class="sf">SF</span></div>
+        <div class="typ">Downtown Assemblage</div>
+        <div class="nm">CityView</div>
+        <div class="loc">San Jose, California</div>
+        <div class="note">An entire city block acquired for redevelopment, including 500,000 SF of
+          existing office, two ancillary buildings, and the site that became 200 Park.</div>
+        <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
+      </div>
+      <div class="deal" data-reveal style="--d:0ms">
+        <div class="amt">882,000 <span class="sf">SF</span></div>
+        <div class="typ">Build&#8209;to&#8209;Suit</div>
+        <div class="nm">Central Wolfe</div>
+        <div class="loc">Sunnyvale, California &middot; 17 acres</div>
+        <div class="note">Built to suit for Apple on an acquired 17-acre parcel.</div>
+        <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
+      </div>
+      <div class="deal" data-reveal style="--d:110ms">
+        <div class="amt">880,000 <span class="sf">SF</span></div>
+        <div class="typ">Development</div>
+        <div class="nm">Springdale Green</div>
+        <div class="loc">Austin, Texas &middot; 30 acres</div>
+        <div class="note">East Austin campus developed on an acquired 30-acre site.</div>
+        <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
+      </div>
+      <div class="deal" data-reveal style="--d:220ms">
+        <div class="amt">500,000+ <span class="sf">SF</span></div>
+        <div class="typ">Acquisition &amp; Repositioning</div>
+        <div class="nm">The Summit Rancho Bernardo</div>
+        <div class="loc">San Diego County, California &middot; 105 acres</div>
+        <div class="note">Office and R&amp;D campus acquired and revitalized, now fully leased to
+          Apple and Northrop Grumman.</div>
         <div class="attr">As Chief Investment Officer, Jay Paul Company</div>
       </div>
     </div>
@@ -574,10 +607,10 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
       <div class="role" data-reveal style="--d:140ms">Founder</div>
 
       <p data-reveal style="--d:200ms">
-        Matt founded BackStraight Capital Advisors after more than thirty years in commercial real
-        estate, most recently as Chief Investment Officer of Jay Paul Company, where he spent
-        twenty-five years building and financing one of the West Coast's most significant
-        development portfolios.
+        Matt founded BackStraight Capital Advisors after four decades in commercial real estate,
+        most recently as Chief Investment Officer of Jay Paul Company, where he spent twenty-five
+        years building and financing one of the West Coast's most significant development
+        portfolios.
       </p>
       <p data-reveal style="--d:260ms">
         That experience sits on the ownership side of the table — underwriting the deal, structuring
@@ -588,8 +621,10 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
 
       <ul class="creds">
         <li data-reveal style="--d:300ms"><span><strong>Chief Investment Officer</strong>, Jay Paul Company &mdash; 2000&ndash;2025. Acquisitions, dispositions, and all capital and financing activity.</span></li>
-        <li data-reveal style="--d:360ms"><span><strong>SVP &amp; District Manager</strong>, KeyCorp Real Estate Capital. Earlier commercial real estate finance roles in San Francisco and New York.</span></li>
-        <li data-reveal style="--d:420ms"><span><strong>NAIOP</strong> &mdash; Board of Directors, San Diego and Silicon Valley chapters; Chapter President, 2013.</span></li>
+        <li data-reveal style="--d:360ms"><span><strong>SVP &amp; Regional Manager</strong>, KeyBank N.A. &mdash; 1997&ndash;2000. Established the bank's first California commercial real estate finance presence and grew it to three offices statewide.</span></li>
+        <li data-reveal style="--d:420ms"><span><strong>SVP &amp; District Manager</strong>, Bank of America &mdash; 1992&ndash;1997. Commercial real estate distressed asset group: debt restructuring, loan sales, and foreclosures.</span></li>
+        <li data-reveal style="--d:480ms"><span><strong>Earlier roles</strong> at Dai&#8209;Ichi Kangyo Real Estate, Sumitomo Bank, and Chemical Bank in San Francisco and New York, beginning in 1983.</span></li>
+        <li data-reveal style="--d:540ms"><span><strong>NAIOP</strong> &mdash; Board member and past president, Silicon Valley chapter; board member, San Diego chapter. ULI full member.</span></li>
       </ul>
     </div>
   </div>
