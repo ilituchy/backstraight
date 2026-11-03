@@ -649,9 +649,8 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
       <!-- spam trap: real people never fill this in -->
       <div class="hp" aria-hidden="true">
         <label for="cf-website">Leave this field empty</label>
-        <input id="cf-website" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+        <input id="cf-website" name="botcheck" type="checkbox" tabindex="-1" autocomplete="off">
       </div>
-      <input type="hidden" name="_subject" value="New inquiry from backstraight site">
 
       <button type="submit" class="btn" id="cfSubmit">Send inquiry <span class="arw">&rarr;</span></button>
       <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
@@ -767,9 +766,12 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
   });
 
   /* ---------------- contact form ----------------
-     Recipient is configured in the Formspree dashboard, NOT here — so the
-     address can change without touching this file. Paste the form id below. */
-  var FORM_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_FORM_ID';
+     Web3Forms relays to the address the key was issued to. The key is designed
+     to be public and is the only configuration — there is no dashboard and no
+     account to sign into. To change where inquiries land, issue a new key at
+     web3forms.com for the new address and swap the string below. */
+  var ACCESS_KEY = 'WEB3FORMS_ACCESS_KEY';
+  var FORM_ENDPOINT = 'https://api.web3forms.com/submit';
 
   var form = document.getElementById('contactForm');
   var submitBtn = document.getElementById('cfSubmit');
@@ -813,27 +815,42 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
       setMsg('bad', 'Please fix the highlighted fields and try again.');
       return;
     }
-    if (FORM_ENDPOINT.indexOf('REPLACE_WITH_FORM_ID') !== -1) {
-      setMsg('bad', '<strong>Form not connected yet.</strong> This site still needs a Formspree form ID before inquiries can be delivered.');
-      return;
-    }
+    if (document.getElementById('cf-website').checked) return;  /* bot */
+
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending\u2026';
     msg.className = 'form-msg';
 
+    var get = function(id){ return document.getElementById(id).value.trim(); };
+    var who = get('cf-name');
+    var firm = get('cf-company');
+
+    /* Keys become the row labels in the notification email, so they are written
+       the way they should read in Matt's inbox. */
+    var payload = {
+      access_key: ACCESS_KEY,
+      from_name: 'BackStraight Capital Advisors',
+      subject: 'New inquiry \u2014 ' + who + (firm ? ' (' + firm + ')' : ''),
+      name: who,
+      email: get('cf-email'),
+      Company: firm || '\u2014',
+      Phone: get('cf-phone') || '\u2014',
+      'Inquiry type': get('cf-type') || 'Not specified',
+      Message: get('cf-message')
+    };
+
     fetch(FORM_ENDPOINT, {
       method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
     }).then(function(res){
-      if (res.ok) {
+      return res.json().then(function(d){ return { ok: res.ok, data: d }; });
+    }).then(function(r){
+      if (r.ok && r.data && r.data.success) {
         form.reset();
         setMsg('ok', '<strong>Thank you \u2014 your message is on its way.</strong> You can expect a reply within one business day.');
       } else {
-        return res.json().then(function(d){
-          var detail = (d && d.errors && d.errors.length) ? d.errors.map(function(x){return x.message;}).join(' ') : '';
-          setMsg('bad', 'Something went wrong sending that. ' + detail);
-        });
+        setMsg('bad', 'Something went wrong sending that. Please try again in a moment.');
       }
     }).catch(function(){
       setMsg('bad', 'Could not reach the server. Please check your connection and try again.');
