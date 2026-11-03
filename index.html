@@ -157,7 +157,7 @@ h1 .accent{
 
 /* ---------- stats ---------- */
 .stats{background:var(--bg-soft);border-bottom:1px solid var(--line);padding:76px 0}
-.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .stat{text-align:center;padding:16px 20px;position:relative}
 .stat+.stat::before{content:'';position:absolute;left:0;top:18%;height:64%;width:1px;background:var(--line)}
 .stat .num{
@@ -165,7 +165,6 @@ h1 .accent{
   letter-spacing:-.03em;line-height:1;margin-bottom:12px;font-variant-numeric:tabular-nums;
 }
 .stat .num .unit{color:var(--red)}
-.stat .num .tbd{opacity:.3}
 .stat .lbl{font-size:.74rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
 
 /* ---------- generic section ---------- */
@@ -268,10 +267,6 @@ h2{font-size:clamp(1.85rem,4.1vw,2.85rem);font-weight:800;letter-spacing:-.03em;
   .proj{aspect-ratio:3/4}
   .proj-body{padding:90px 22px 26px}
   .proj .amt{font-size:2.1rem}
-}
-.placeholder-note{
-  margin-top:34px;padding:16px 20px;background:#fffbe9;border:1px dashed #e0c86a;
-  border-radius:5px;font-size:.85rem;color:#7a6320;
 }
 
 /* ---------- about ---------- */
@@ -430,14 +425,10 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
 <section class="stats">
   <div class="wrap stat-grid">
     <div class="stat" data-reveal style="--d:0ms">
-      <div class="num">$<span class="tbd">X</span><span class="unit">B</span></div>
-      <div class="lbl">Project Financing Raised</div>
-    </div>
-    <div class="stat" data-reveal style="--d:130ms">
       <div class="num">$<span data-count="1">0</span><span class="unit">B+</span></div>
       <div class="lbl">Commercial Real Estate Acquired</div>
     </div>
-    <div class="stat" data-reveal style="--d:260ms">
+    <div class="stat" data-reveal style="--d:130ms">
       <div class="num"><span data-count="30">0</span><span class="unit">+</span></div>
       <div class="lbl">Years in the Industry</div>
     </div>
@@ -493,13 +484,6 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
       the Bay Area and San Diego County.
     </div>
 
-    <!-- ============================================================
-         SELECTED TRANSACTIONS — Jay Paul Company tenure.
-         Every figure below is sourced from public trade reporting, NOT
-         from Matt. He should confirm or correct each one.
-         Keep the .attr line on every card: attribution is what makes
-         these his biography rather than BackStraight's portfolio.
-         ============================================================ -->
     <div class="projects">
       <article class="proj" data-reveal="scale" style="--d:0ms">
         <img src="assets/181-fremont.jpg"
@@ -576,11 +560,6 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
       transactions of BackStraight Capital Advisors.
     </p>
 
-    <div class="placeholder-note" data-reveal>
-      <strong>Needs Matt's sign-off.</strong> Every figure on this page was taken from public trade
-      reporting, not from Matt &mdash; he should confirm or correct each one, and swap in any deal
-      he would rather feature. The financing total in the stat band above is still blank.
-    </div>
   </div>
 </section>
 
@@ -594,7 +573,6 @@ footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:56px 0 40
       <h2 data-reveal style="--d:90ms">Matt Lituchy</h2>
       <div class="role" data-reveal style="--d:140ms">Founder</div>
 
-      <!-- Replace the two paragraphs below with Matt's own blurb when it arrives. -->
       <p data-reveal style="--d:200ms">
         Matt founded BackStraight Capital Advisors after more than thirty years in commercial real
         estate, most recently as Chief Investment Officer of Jay Paul Company, where he spent
